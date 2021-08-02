@@ -7,28 +7,32 @@ use App\Repository\SecteurRepository;
 use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints
 
 /**
  * @ORM\Entity(repositoryClass=SecteurRepository::class)
  */
-#[ApiResource(
-              )]
+#[ApiResource()]
 class Secteur
 {
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("secteur:liste") 
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("secteur:liste") 
      */
     private $nom;
 
     /**
      * @ORM\OneToMany(targetEntity=Competences::class, mappedBy="secteur")
+     * @Groups("secteur:liste") 
      */
     private $competences;
 
