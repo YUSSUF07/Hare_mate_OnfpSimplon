@@ -11,7 +11,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * @ORM\Entity(repositoryClass=SecteurRepository::class)
  */
-#[ApiResource]
+#[ApiResource(
+              )]
 class Secteur
 {
     /**
