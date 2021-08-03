@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
-use Symfony\Component\Validator\Constraints;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=SecteurRepository::class)
@@ -21,12 +21,14 @@ class Secteur
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      * @Groups("secteur:liste") 
+     * @Assert\NotBlank
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups("secteur:liste") 
+     * Assert\leng(min=8)
      */
     private $nom;
 
