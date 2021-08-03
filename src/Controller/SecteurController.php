@@ -23,34 +23,4 @@ class SecteurController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/api", name="api", methods="Get")
-     */
-
-    public function api_g(SecteurRepository $secteurRepository): Response
-    {
-        return $this->json($secteurRepository->findAll(), 200, [], ['groups' => 'secteur:liste']);
-    }
-
-     /**
-     * @Route("/api", name="api",)
-     */
-
-    public function api_p(Request $request, SerializerInterface $serializer, EntityManagerInterface $em)
-    {
-        try{
-            $jsonRecu = $request->getContent();
-
-            $secteur = $serializer->deserialize($jsonRecu, Secteur::class, 'json');
-            
-            $em->persist($secteur);
-            $em->fflush;
-            return $this->json($secteur, 200, [], ['groups' => 'secteur:liste']);
-        }
-       
-        catch(NotEncodableValueException $e){
-            return $this->json(['status' => 400,
-            'message' => $e->getMessage()], 400);
-        }
-    }
 }
