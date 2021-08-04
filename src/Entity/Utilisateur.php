@@ -16,7 +16,15 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass=UtilisateurRepository::class)
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
-#[ApiResource]
+#[ApiResource (
+    collectionOperations:  [
+        'get' => ['method' => 'get'],
+    ],
+    itemOperations: [
+        'get' => ['method' => 'get'],
+    ],
+)]
+
 class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 {
     /**
@@ -74,6 +82,11 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="integer")
      */
     private $telephone;
+
+    public function __toString()
+    {
+        return(string) $this->id;
+    }
 
     public function __construct()
     {

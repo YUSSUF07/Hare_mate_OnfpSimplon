@@ -24,13 +24,13 @@ class SecteurController extends AbstractController
     #[Route('/new', name: 'secteur_new', methods: ['GET', 'POST'])]
     public function new(Request $request): Response
     {
-        $Secteur = new secteur();
+        $secteur = new secteur();
         $form = $this->createForm(SecteurType::class, $secteur);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($Secteur);
+            $entityManager->persist($secteur);
             $entityManager->flush();
 
             return $this->redirectToRoute('secteur_index', [], Response::HTTP_SEE_OTHER);
@@ -71,9 +71,9 @@ class SecteurController extends AbstractController
     #[Route('/{id}', name: 'secteur_delete', methods: ['POST'])]
     public function delete(Request $request, Secteur $secteur): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$Secteur->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$secteur->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($Secteur);
+            $entityManager->remove($secteur);
             $entityManager->flush();
         }
 

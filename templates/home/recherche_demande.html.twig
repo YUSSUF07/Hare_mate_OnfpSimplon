@@ -8,13 +8,13 @@
             {% for utilisateur in utilisateurs %}
                 <div class="col-3">
                     <div class="card" style="width: 18rem;">
-                        <a href="{{path('#')}}">
+                        <a href="{{path('demande_new')}}">
                             <img src="..." class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">
-                                {{utilisateurs.nom}}
-                                {{utilisateurs.prenom}}
-                                {{utilisateurs.adresse}}
+                                {{utilisateur.nom}}
+                                {{utilisateur.prenom}}
+                                {{utilisateur.adresse}}
                                 {{utilisateur.profil}}
                                 </h5>
                                 <p class="card-text"> </p>
