@@ -3,5 +3,23 @@
 {% block title %}Hello SecteurController!{% endblock %}
 
 {% block body %}
+	<div class="container">
+        <div class="row flex">
+            {% for secteur in secteurs %}
+                <div class="col-3">
+                    <div class="card" style="width: 18rem;">
+                        <img src="..." class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                            {{secteur.nom}}
+                            </h5>
+                            <p class="card-text"> </p>
+                        </div>
+                    </div>
+                </div>
+                <a href="{{path('secteur_edit', {id: secteur.id}) }}"><button class="btn btn-secondary">Editer</button></a>
+            {% endfor %}
+        </div>
+    </div>
 
 {% endblock %}

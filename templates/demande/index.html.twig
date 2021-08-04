@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Demande{% endblock %}
+
+{% block body %}
+    <h1>Menu des Demandes</h1>
+    <d>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Description</th>
+                    <th>Tarif</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for demande in demandes %}
+                <tr>
+                    <td>{{ demande.id }}</td>
+                    <td>{{ demande.description }}</td>
+                    <td>{{ demande.tarif }}</td>
+                    <td>{{ demande.date ? demande.date|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>
+                        <a href="{{ path('demande_show', {'id': demande.id}) }}">Consulter</a>
+                        <a href="{{ path('demande_edit', {'id': demande.id}) }}">Editer</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">Vous n'avez pas encore fait de demandes</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </d>
+
+    <a href="{{ path('demande_new') }}">Créer une demande</a>
+{% endblock %}

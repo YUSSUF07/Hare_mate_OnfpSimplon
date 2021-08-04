@@ -2,9 +2,11 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
-use App\Repository\CompetencesRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\CompetencesRepository;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=CompetencesRepository::class)
@@ -16,21 +18,26 @@ class Competences
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("Competences:liste")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("Competences:liste")
      */
     private $specialite;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("Competences:liste")
      */
     private $niveau;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("Competences:liste")
+     * @Assert\NotBlank
      */
     private $description;
 
