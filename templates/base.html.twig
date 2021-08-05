@@ -50,17 +50,24 @@
       <div class="collapse navbar-collapse" id="navbarExample01">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item active">
-            <a class="nav-link" aria-current="page" href="#">Home</a>
+            <a class="nav-link" aria-current="page" href="{{path('home')}}">Hare mate</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Features</a>
+            <a class="nav-link" href="{{path('demande_index')}}">Demande</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Pricing</a>
+            <a class="nav-link" href="{{path('secteur_index')}}">Secteur</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
-          </li>
+            <li class="nav-item">
+                { % if app.user % }<li><a class="nav-item" href="{{path('app_logout')}}" > Se Deconnecter</a></li>{ % else % }
+                <li>
+                    <a class="nav-item" href="{{path('app_register')}}">Inscription</a>
+                </li>
+                <li>
+                <a  class="nav-item" href="{{path('app_login')}}">Connexion</a>    
+                </li>
+                { % endif % }
+             </li>
         </ul>
       </div>
     </div>
@@ -99,52 +106,7 @@
   </div>
   <!-- Background image -->
 </header>
-        <nav>
-            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <a href ="{{path('home')}}">
-                    <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Acceuil</button>
-                    </a>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <a href="{{path('demande_index')}}">
-                    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Demande</button>
-                    </a> 
-                </li>
-                <li class="nav-item" role="presentation">
-                    <a href="{{path('secteur_index')}}">
-                    <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Profil</button>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    { % if app.user % }<li><a href="{{path('app_logout')}}" class="nav-link"> Se Deconnecter</a></li>{ % else % }
-                    <li>
-                        <a href="{{path('app_register')}}"><button class="btn btn-primary" type="button">Inscription</button></a>
-                    </li>
-                    <li>
-                    <a href="{{path('app_login')}}"><button class="btn btn-primary" type="button">Connexion</button></a>    
-                    </li>
-                    
-                    
-                    {% endif % }
-                </li>
-
-                
-
-            </ul>
-            <div class="tab-content" id="pills-tabContent">
-                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">...</div>
-                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">...</div>
-                <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">...</div>
-            </div>
              {% block body %}{% endblock %}
-        </nav>
-<<<<<<< HEAD
-        {% block body %}{% endblock %}
-        <footer>
-                <div>
-                    <h2>YF_Corp</h2>
-=======
                 <!-- Footer -->
             <footer class="text-center text-lg-start bg-light text-muted">
                 <!-- Section: Social media -->
@@ -267,15 +229,10 @@
                 <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
                     © 2021 Copyright:
                     <a class="text-reset fw-bold" href="https://mdbootstrap.com/">Hare_Mate</a>
->>>>>>> 35b11c7c72066f0b93bfa6dec28837df7047622b
                 </div>
                 <!-- Copyright -->
                 </footer>
                 <!-- Footer -->
             </footer>
-<<<<<<< HEAD
-=======
-
->>>>>>> 35b11c7c72066f0b93bfa6dec28837df7047622b
     </body>
 </html>

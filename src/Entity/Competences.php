@@ -12,9 +12,12 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass=CompetencesRepository::class)
  */
 #[ApiResource(
-    normalizationContext:['goups' => 'competences:liste'],
-    collectionOperations:['methods'=> 'get'],
-    itemOperations:[ 'methods' => 'get']
+    collectionOperations:  [
+        'get' => ['method' => 'get'],
+    ],
+    itemOperations: [
+        'get' => ['method' => 'get'],
+    ],
 )]
 class Competences
 {
@@ -49,6 +52,12 @@ class Competences
      * @ORM\ManyToOne(targetEntity=Secteur::class, inversedBy="competences")
      */
     private $secteur;
+
+    public function __toString()
+    {
+        return(string) $this->id;
+    }
+
 
     public function getId(): ?int
     {

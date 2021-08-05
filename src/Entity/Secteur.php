@@ -37,6 +37,12 @@ class Secteur
      * @Groups("secteur:liste") 
      */
     private $competences;
+    
+    public function __toString()
+    {
+        return(string) $this->id;
+    }
+
 
     public function __construct()
     {

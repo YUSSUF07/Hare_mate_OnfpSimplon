@@ -46,6 +46,12 @@ class Demande
      * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="demandes")
      */
     private $user;
+    
+    public function __toString()
+    {
+        return(string) $this->id;
+    }
+
 
     public function getId(): ?int
     {
