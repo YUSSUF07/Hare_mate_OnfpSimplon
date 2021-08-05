@@ -11,7 +11,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass=CompetencesRepository::class)
  */
-#[ApiResource()]
+#[ApiResource(
+    normalizationContext:['goups' => 'competences:liste'],
+    collectionOperations:['methods'=> 'get'],
+    itemOperations:[ 'methods' => 'get']
+)]
 class Competences
 {
     /**

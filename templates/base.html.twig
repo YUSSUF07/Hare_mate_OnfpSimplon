@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Bienvenue!{% endblock %}</title>
         {# Run `composer require symfony/webpack-encore-bundle`
            and uncomment the following Encore helpers to start using Symfony UX #}
            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -34,11 +34,20 @@
                     <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Profil</button>
                     </a>
                 </li>
-                { % if app.utilisateur% }
-                    <li class="nav-item">
-                        <a href="{{path('app_logout')}}" class="nav-link"> Se Deconnecter</a>
+                <li class="nav-item">
+                    { % if app.user % }<li><a href="{{path('app_logout')}}" class="nav-link"> Se Deconnecter</a></li>{ % else % }
+                    <li>
+                        <a href="{{path('app_register')}}"><button class="btn btn-primary" type="button">Inscription</button></a>
                     </li>
-                { % endif% }
+                    <li>
+                    <a href="{{path('app_login')}}"><button class="btn btn-primary" type="button">Connexion</button></a>    
+                    </li>
+                    
+                    
+                    {% endif % }
+                </li>
+
+                
 
             </ul>
             <div class="tab-content" id="pills-tabContent">
@@ -47,11 +56,11 @@
                 <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">...</div>
             </div>
         </nav>
-            <footer>
+        {% block body %}{% endblock %}
+        <footer>
                 <div>
-                    
+                    <h2>YF_Corp</h2>
                 </div>
             </footer>
-        {% block body %}{% endblock %}
     </body>
 </html>

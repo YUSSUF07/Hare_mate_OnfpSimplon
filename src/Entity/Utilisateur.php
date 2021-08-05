@@ -30,6 +30,7 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      * @Groups("user:liste")
+     * @Assert\Email
      * @Assert\NotBlank
      */
     private $email;
@@ -62,6 +63,7 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("demande:liste")
      */
     private $prenom;
 
