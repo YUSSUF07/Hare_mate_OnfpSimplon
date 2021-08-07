@@ -34,7 +34,7 @@ class Secteur
 
     /**
      * @ORM\OneToMany(targetEntity=Competences::class, mappedBy="secteur")
-     * @Groups("secteur:liste") 
+     * @@Groups("Competences:liste")
      */
     private $competences;
     

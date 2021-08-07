@@ -2,23 +2,6 @@
 
 {% block title %}Hare mate{% endblock %}
 
-{% block body %} 
-    <br>
-    <div class="container">
-        <div class="row flex">
-            {% for secteur in secteurs %}
-                <div class="col-3">
-                    <div class="card" style="width: 18rem;">
-                        <img src="..." class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">
-                            {{secteur.nom}}
-                            </h5>
-                            <p class="card-text"> </p>
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-    </div>
+{% block body %}
+{{ include('base/_nav.html.twig') }} 
 {% endblock %}

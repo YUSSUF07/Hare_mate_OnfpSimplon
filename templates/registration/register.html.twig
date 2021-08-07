@@ -3,22 +3,30 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    <h1>Inscription</h1>
-   <div class="block"> 
-        <div class="registrationForm"> 
-            {{ form_start(registrationForm) }}
-                {{ form_row(registrationForm.nom) }}
-                {{ form_row(registrationForm.prenom) }}
-                {{ form_row(registrationForm.adresse) }}
-                {{ form_row(registrationForm.telephone) }}
-                {{ form_row(registrationForm.email) }}
-                {{ form_row(registrationForm.plainPassword, {
-                    label: 'Password'
-                }) }}
-                {{ form_row(registrationForm.agreeTerms) }}
+    <section id="contact" class="contact">
+      <div class="container">
 
-                <button type="submit" class="btn">S'inscrire</button>
-            {{ form_end(registrationForm) }}
+        <div class="section-title">
+          <h2>Inscription</h2>
+          <p>Veuillez remplir les champs suivants</p>
         </div>
-    </div>
+              <div class="block"> 
+            <div class="registrationForm"> 
+                {{ form_start(registrationForm) }}
+                    {{ form_row(registrationForm.nom) }}
+                    {{ form_row(registrationForm.prenom) }}
+                    {{ form_row(registrationForm.adresse) }}
+                    {{ form_row(registrationForm.telephone) }}
+                    {{ form_row(registrationForm.email) }}
+                    {{ form_row(registrationForm.plainPassword, {
+                        label: 'Password'
+                    }) }}
+                    {{ form_row(registrationForm.agreeTerms) }}
+
+                    <div class="text-center"><button type="submit">Enregister</button></div>
+                {{ form_end(registrationForm) }}
+            </div>
+        </div>
+
+    </section>
 {% endblock %}

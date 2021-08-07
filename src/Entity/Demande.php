@@ -11,7 +11,12 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass=DemandeRepository::class)
  */
-#[ApiResource(
+#[ApiResource(  collectionOperations:  [
+    'get' => ['method' => 'get'], 'post' => ['methods' => 'post']
+],
+itemOperations: [
+    'get' => ['method' => 'get'],
+],
 )]
 class Demande
 {

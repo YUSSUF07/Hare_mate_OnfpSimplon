@@ -16,8 +16,8 @@ use Symfony\Component\Validator\Constraints as Assert;
         'get' => ['method' => 'get'],
     ],
     itemOperations: [
-        'get' => ['method' => 'get'],
-    ],
+        'get' => ['method' => 'get']
+    ]
 )]
 class Competences
 {
