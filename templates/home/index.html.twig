@@ -3,5 +3,9 @@
 {% block title %}Hare mate{% endblock %}
 
 {% block body %}
-{{ include('base/_nav.html.twig') }} 
+
+    {% if app.user %}
+        {{include('secteur/_index.html.twig')}}
+    {% endif %}
+
 {% endblock %}

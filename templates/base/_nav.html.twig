@@ -2,7 +2,7 @@
   <header id="header" class="fixed-top header-transparent">
     <div class="container d-flex align-items-center justify-content-between">
 
-      <h1 class="logo"><a href="index.html">Hare mate</a></h1>
+      <h1 class="logo"><a href="#">Hare mate</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -10,7 +10,6 @@
       {% if app.user %}
         <ul>
           <li><a class="nav-link scrollto active" href="{{path('home')}}">Acceuil</a></li>
-          <li><a class="nav-link scrollto" href="{{path('demande_index')}}">Demandes</a></li>
           <li><a class="nav-link scrollto" href="{{path('secteur_index')}}">Secteur</a></li>
           <li class="dropdown"><a href="#"><span>Profil</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
@@ -31,8 +30,12 @@
     <div class="container position-relative">
       <h1>Bienvenue sur Hare Mate</h1>
       <h2>La plateforme qui vous permet de trouver des freelancer et d'etre des freelancer</h2>
-      <a href="{{path('app_register')}}" class="btn-get-started scrollto">Inscrivez vous</a>
-      <a href="{{path('app_login')}}" class="btn-get-started scrollto">Connectez vous</a>
+      {% if app.user %}
+      <a href="{{path('app_logout')}}" class="btn-get-started scrollto">Deconnexion</a>
+      {% else %}  
+      <a href="{{path('app_register')}}" class="btn-get-started scrollto">Inscription</a>
+      <a href="{{path('app_login')}}" class="btn-get-started scrollto">Connexion</a>
+      {% endif %}
     </div>
   </section><!-- End Hero -->
 
