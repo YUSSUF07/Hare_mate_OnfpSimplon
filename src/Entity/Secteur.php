@@ -13,34 +13,41 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass=SecteurRepository::class)
  */
-#[ApiResource()]
+#[ApiResource(
+    normalizationContext:(['groups' => 'read:secteur']),
+    denormalizationContext:(['groups' => 'write:secteur']),
+    collectionOperations:(['get']),
+    itemOperations:['put',
+                    'delete',
+                    'get' => ['normalization_context' => ['groups' => 'read:secteur']]
+                    ]
+)]
 class Secteur
 {
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     * @Groups("secteur:liste") 
-     * @Assert\NotBlank
+     * @ORM\Column(type="integer") 
      */
+    #[Groups(['read:secteur'])]
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Groups("secteur:liste") 
+     * @ORM\Column(type="string", length=255) 
      * Assert\leng(min=8)
      */
+    #[Groups(['read:secteur'])]
     private $nom;
 
     /**
      * @ORM\OneToMany(targetEntity=Competences::class, mappedBy="secteur")
-     * @@Groups("Competences:liste")
      */
+    #[Groups(['read:secteur'])]
     private $competences;
     
     public function __toString()
     {
-        return(string) $this->id;
+        return(string) $this->nom;
     }
 
 

@@ -12,12 +12,13 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass=CompetencesRepository::class)
  */
 #[ApiResource(
-    collectionOperations:  [
-        'get' => ['method' => 'get'],
-    ],
-    itemOperations: [
-        'get' => ['method' => 'get']
-    ]
+    normalizationContext:(['groups' => 'read:competences']),
+    denormalizationContext:(['groups' => 'write:competences']),
+    collectionOperations:(['get']),
+    itemOperations:['put',
+                    'delete',
+                    'get' => ['normalization_context' => ['groups' => 'read:competences']]
+                    ]
 )]
 class Competences
 {
@@ -25,32 +26,34 @@ class Competences
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups("Competences:liste")
      */
+    #[Groups(['read:competences','read:user'])]
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("Competences:liste")
      */
+    #[Groups(['read:competences','read:user'])]
     private $specialite;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("Competences:liste")
      */
+    #[Groups(['read:competences','read:user'])]
     private $niveau;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("Competences:liste")
      * @Assert\NotBlank
      */
+    
+    #[Groups(['read:competences','read:user'])]
     private $description;
 
     /**
      * @ORM\ManyToOne(targetEntity=Secteur::class, inversedBy="competences")
      */
+    #[Groups(['read:competences','read:user'])]
     private $secteur;
 
     public function __toString()

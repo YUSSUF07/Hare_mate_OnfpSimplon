@@ -14,15 +14,16 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass=UtilisateurRepository::class)
- * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
+ * @UniqueEntity(fields={"email"}, message="Ce mail est deja utilise")
  */
-#[ApiResource (
-    collectionOperations:  [
-        'get' => ['method' => 'get'],
-    ],
-    itemOperations: [
-        'get' => ['method' => 'get'],
-    ],
+#[ApiResource(
+    normalizationContext:(['groups' => 'read:user']),
+    denormalizationContext:(['groups' => 'write:user']),
+    collectionOperations:(['get']),
+    itemOperations:['put',
+                    'delete',
+                    'get' => ['normalization_context' => ['groups' => 'read:user']]
+                    ]
 )]
 
 class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
@@ -31,16 +32,16 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups("user:liste")
      */
+    #[Groups(['read:user','write:user'])]
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Groups("user:liste")
      * @Assert\Email
      * @Assert\NotBlank
      */
+    #[Groups(['read:user','write:user'])]
     private $email;
 
     /**
@@ -52,37 +53,43 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      * @ORM\Column(type="string")
      */
+    #[Groups(['read:user','write:user'])]
     private $password;
 
     /**
      * @ORM\OneToMany(targetEntity=Demande::class, mappedBy="user")
      */
+    #[Groups(['read:user'])]
     private $demandes;
 
     /**
      * @ORM\OneToOne(targetEntity=Competences::class, cascade={"persist", "remove"})
      */
+    #[Groups(['read:user'])]
     private $profil;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
+    #[Groups(['read:user','write:user'])]
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("demande:liste")
      */
+    #[Groups(['read:user','write:user'])]
     private $prenom;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
+    #[Groups(['read:user','write:user'])]
     private $adresse;
 
     /**
      * @ORM\Column(type="integer")
      */
+    #[Groups(['read:user','write:user'])]
     private $telephone;
 
     public function __toString()
