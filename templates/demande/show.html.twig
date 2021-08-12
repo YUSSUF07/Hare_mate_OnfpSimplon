@@ -7,15 +7,11 @@
     <div class="container mt-4">
         <div class="row">
             <div class="col-md-8">
-                
+                <td>{{ demande.user }}</th>
             </div>
             <div class="col-md-4">
                 <table class="table">
                     <tbody>
-                        <tr>
-                            <th>Id</th>
-                            <td>{{ demande.id }}</td>
-                        </tr>
                         <tr>
                             <th>Description</th>
                             <td>{{ demande.description }}</td>
@@ -33,24 +29,11 @@
                 <a href="{{ path('demande_edit', {'id': demande.id}) }}" class="btn btn-primary">Editer la demande</a>
             </div>
         </div>
-        <nav>
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">
-                {{utilisateur.nom}}
-                {{utilisateur.prenom}}
-                {{utilisateur.adresse}}
-                {{utilisateur.profil}}
-                </h5>
-                <p class="card-text"> </p>
-            </div>
-        </nav>
+        
         
         
     </div>
-    <a href="{{ path('demande_index') }}">Retouner</a>
-
+    <a href="{{ path('demande_index') }}" class="btn btn-primary">Retouner</a>
+    {{ include('demande/_delete_form.html.twig') }} 
     
-
-    {{ include('demande/_delete_form.html.twig') }}
 {% endblock %}

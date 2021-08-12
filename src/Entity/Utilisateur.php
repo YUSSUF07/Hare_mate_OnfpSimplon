@@ -17,12 +17,14 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @UniqueEntity(fields={"email"}, message="Ce mail est deja utilise")
  */
 #[ApiResource(
-    normalizationContext:(['groups' => 'read:user']),
+    normalizationContext:(['groups' => ['read:user']]),
     denormalizationContext:(['groups' => 'write:user']),
-    collectionOperations:(['get']),
+    collectionOperations:['get'=>['normalization_context' => ['groups' => ['read:users']]]
+                            
+                        ],
     itemOperations:['put',
                     'delete',
-                    'get' => ['normalization_context' => ['groups' => 'read:user']]
+                    'get' => ['normalization_context' => ['groups' => ['read:user','write:user']]]
                     ]
 )]
 
@@ -33,7 +35,7 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    #[Groups(['read:user','write:user'])]
+    #[Groups(['read:user','read:users'])]
     private $id;
 
     /**
@@ -41,7 +43,7 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
      * @Assert\Email
      * @Assert\NotBlank
      */
-    #[Groups(['read:user','write:user'])]
+    #[Groups(['read:user','read:users'])]
     private $email;
 
     /**
@@ -53,7 +55,6 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      * @ORM\Column(type="string")
      */
-    #[Groups(['read:user','write:user'])]
     private $password;
 
     /**
@@ -63,21 +64,15 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     private $demandes;
 
     /**
-     * @ORM\OneToOne(targetEntity=Competences::class, cascade={"persist", "remove"})
-     */
-    #[Groups(['read:user'])]
-    private $profil;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
-    #[Groups(['read:user','write:user'])]
+    #[Groups(['read:user','write:user','read:users'])]
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    #[Groups(['read:user','write:user'])]
+    #[Groups(['read:user','write:user','read:users'])]
     private $prenom;
 
     /**
@@ -92,9 +87,16 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[Groups(['read:user','write:user'])]
     private $telephone;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Competences::class, cascade={"persist", "remove"})
+     */
+    #[Groups(['read:user'])]
+    private $profil;
+
+
     public function __toString()
     {
-        return(string) $this->id;
+        return(string) $this->prenom;
     }
 
     public function __construct()
@@ -221,17 +223,6 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getProfil(): ?Competences
-    {
-        return $this->profil;
-    }
-
-    public function setProfil(?Competences $profil): self
-    {
-        $this->profil = $profil;
-
-        return $this;
-    }
 
     public function getNom(): ?string
     {
@@ -280,4 +271,17 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function getProfil(): ?Competences
+    {
+        return $this->profil;
+    }
+
+    public function setProfil(?Competences $profil): self
+    {
+        $this->profil = $profil;
+
+        return $this;
+    }
+
 }

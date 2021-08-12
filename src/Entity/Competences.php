@@ -13,11 +13,11 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 #[ApiResource(
     normalizationContext:(['groups' => 'read:competences']),
-    denormalizationContext:(['groups' => 'write:competences']),
-    collectionOperations:(['get']),
-    itemOperations:['put',
+    denormalizationContext:(['groups' => 'write:competence']),
+    collectionOperations:(['get'=> ['groups' => 'read:competences']]),
+    itemOperations:['put' => ['groups' => 'write:competence'],
                     'delete',
-                    'get' => ['normalization_context' => ['groups' => 'read:competences']]
+                    'get' => ['normalization_context' => ['groups' => 'read:competence']]
                     ]
 )]
 class Competences
@@ -27,19 +27,19 @@ class Competences
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    #[Groups(['read:competences','read:user'])]
+    #[Groups(['read:competences','read:competence','read:user'])]
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    #[Groups(['read:competences','read:user'])]
+    #[Groups(['read:competences','read:competence','read:user','write:competence','read:secteur'])]
     private $specialite;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    #[Groups(['read:competences','read:user'])]
+    #[Groups(['read:competence','read:user','write:competence'])]
     private $niveau;
 
     /**
@@ -47,18 +47,18 @@ class Competences
      * @Assert\NotBlank
      */
     
-    #[Groups(['read:competences','read:user'])]
+    #[Groups(['read:competence','read:user','write:competence'])]
     private $description;
 
     /**
      * @ORM\ManyToOne(targetEntity=Secteur::class, inversedBy="competences")
      */
-    #[Groups(['read:competences','read:user'])]
+    #[Groups(['read:competence','read:competences','read:user'])]
     private $secteur;
 
     public function __toString()
     {
-        return(string) $this->id;
+        return(string) $this->nom;
     }
 
 
@@ -114,4 +114,5 @@ class Competences
 
         return $this;
     }
+
 }

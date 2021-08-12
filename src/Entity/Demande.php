@@ -11,8 +11,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass=DemandeRepository::class)
  */
-#[ApiResource(  normalizationContext:(['groups' => 'read:demande'])
-, itemOperations:['get' => ['normalization_context' => ['groups' => 'read:demande']] ]
+#[ApiResource( normalizationContext:(['groups' => ['read:demande']]),
+                denormalizationContext:(['groups' => 'write:demande']),
+
 )]
 class Demande
 {
@@ -22,31 +23,30 @@ class Demande
      * @ORM\Column(type="integer")
      * 
      */
-    #[Groups(['read:demande','read:user'])]
+    #[Groups(['read:user','read:demande'])]
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    #[Groups(['read:demande','read:user'])]
+    #[Groups(['read:user','read:demande','write:demande'])]
     private $description;
 
     /**
      * @ORM\Column(type="integer")
      */
-    #[Groups(['read:demande','read:user'])]
+    #[Groups(['read:user','write:demande','read:demande'])]
     private $tarif;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    #[Groups(['read:demande'])]
+    #[Groups(['read:user','read:demande','write:demande'])]
     private $date;
 
     /**
      * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="demandes")
      */
-    #[Groups(['read:demande'])]
     private $user;
     
     public function __toString()

@@ -5,7 +5,35 @@
 {% block body %}
 
     {% if app.user %}
+
+      <section id="counts" class="counts section-bg">
+      <div class="container">
+
+        <div class="row counters">
+
+          <div class="text-center">
+          <h3>Devient aussi Freelancer</h3>
+          <p> Tu as aussi des competences, crée un profil et propose tes services à nos clients </p>
+          <a class="cta-btn" href="{{path('competences_index')}}">Crée un profil</a>
+        </div>
+
+        </div>
+
+      </div>
+    </section>
+
         {{include('secteur/_index.html.twig')}}
+        <section id="cta" class="cta">
+      <div class="container">
+
+        <div class="text-center">
+          <h3>Demandes</h3>
+          <p> Rechercher dans notre base de données les meilleurs profils pour t'aider dans tes activités </p>
+          <a class="cta-btn" href="{{path('demande_index')}}">Demandez un service</a>
+        </div>
+
+      </div>
+    </section>
     {% endif %}
 
 {% endblock %}
