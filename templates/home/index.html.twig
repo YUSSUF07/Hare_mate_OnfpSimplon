@@ -1,39 +1,30 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hare mate{% endblock %}
+{% block title %}Hare mate
+{% endblock %}
 
 {% block body %}
 
-    {% if app.user %}
+{% if app.user %}
 
-      <section id="counts" class="counts section-bg">
-      <div class="container">
 
-        <div class="row counters">
+	<section id="cta" class="cta">
+		<div class="text-center">
+			<h3>
+				<span>Tu as des competences</span>
+				Crée un profil et rejoins notre equipe de Freelancer</h3>
+			<a class="cta-btn" href="{{path('profil')}}">Profil</a>
+		</div><br><br>
 
-          <div class="text-center">
-          <h3>Devient aussi Freelancer</h3>
-          <p> Tu as aussi des competences, crée un profil et propose tes services à nos clients </p>
-          <a class="cta-btn" href="{{path('competences_index')}}">Crée un profil</a>
-        </div>
+		<div class="text-center">
+			<h3>Demandes</h3>
+			<p>
+				Rechercher dans notre base de données les meilleurs profils pour t'aider dans tes activités
+			</p>
+			<a class="cta-btn" href="{{path('free')}}">Demandez un service</a>
+		</div>
 
-        </div>
-
-      </div>
-    </section>
-
-        {{include('secteur/_index.html.twig')}}
-        <section id="cta" class="cta">
-      <div class="container">
-
-        <div class="text-center">
-          <h3>Demandes</h3>
-          <p> Rechercher dans notre base de données les meilleurs profils pour t'aider dans tes activités </p>
-          <a class="cta-btn" href="{{path('demande_index')}}">Demandez un service</a>
-        </div>
-
-      </div>
-    </section>
-    {% endif %}
-
+	</div>
+</section>
+{% endif %}
 {% endblock %}

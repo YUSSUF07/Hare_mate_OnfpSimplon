@@ -88,10 +88,11 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     private $telephone;
 
     /**
-     * @ORM\OneToOne(targetEntity=Competences::class, cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity=Competences::class, mappedBy="utilisateur")
      */
-    #[Groups(['read:user'])]
+    #[Groups('read:user')]
     private $profil;
+
 
 
     public function __toString()
@@ -102,6 +103,7 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     public function __construct()
     {
         $this->demandes = new ArrayCollection();
+        $this->profil = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -272,16 +274,35 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getProfil(): ?Competences
+    /**
+     * @return Collection|Competences[]
+     */
+    public function getProfil(): Collection
     {
         return $this->profil;
     }
 
-    public function setProfil(?Competences $profil): self
+    public function addProfil(Competences $profil): self
     {
-        $this->profil = $profil;
+        if (!$this->profil->contains($profil)) {
+            $this->profil[] = $profil;
+            $profil->setUtilisateur($this);
+        }
 
         return $this;
     }
+
+    public function removeProfil(Competences $profil): self
+    {
+        if ($this->profil->removeElement($profil)) {
+            // set the owning side to null (unless already changed)
+            if ($profil->getUtilisateur() === $this) {
+                $profil->setUtilisateur(null);
+            }
+        }
+
+        return $this;
+    }
+
 
 }

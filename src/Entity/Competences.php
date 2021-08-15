@@ -56,6 +56,11 @@ class Competences
     #[Groups(['read:competence','read:competences','read:user'])]
     private $secteur;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="profil")
+     */
+    private $utilisateur;
+
     public function __toString()
     {
         return(string) $this->nom;
@@ -111,6 +116,18 @@ class Competences
     public function setSecteur(?Secteur $secteur): self
     {
         $this->secteur = $secteur;
+
+        return $this;
+    }
+
+    public function getUtilisateur(): ?Utilisateur
+    {
+        return $this->utilisateur;
+    }
+
+    public function setUtilisateur(?Utilisateur $utilisateur): self
+    {
+        $this->utilisateur = $utilisateur;
 
         return $this;
     }

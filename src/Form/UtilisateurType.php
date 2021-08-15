@@ -2,29 +2,28 @@
 
 namespace App\Form;
 
-use App\Entity\Competences;
-use App\Entity\Secteur;
+use App\Entity\Utilisateur;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CompetencesType extends AbstractType
+class UtilisateurType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('specialite')
-            ->add('niveau')
-            ->add('description')
-            ->add('secteur')
+            ->add('nom')
+            ->add('prenom')
+            ->add('adresse')
+            ->add('telephone')
+            ->add('password')  
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Competences::class,
+            'data_class' => Utilisateur::class,
         ]);
     }
 }

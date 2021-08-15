@@ -1,0 +1,24 @@
+{% extends "base.html.twig" %}
+{% block body %}
+<section id="pricing" class="pricing">
+<div class="row">
+	{% for utilisateur in user %}
+		<div class="col-lg-3 col-md-6 mt-4 mt-md-0">
+			<div class="box featured">
+				<h3></h3>
+				<h4>{{utilisateur.prenom}}
+					{{utilisateur.nom}}</h4>
+				<ul>
+					<li>{{utilisateur.adresse}}</li>
+					<li>{{utilisateur.telephone}}</li>
+                    <li>{{utilisateur.email}}</li>
+				</ul>
+				<div class="btn-wrap">
+					<a href="{{path('demande_new')}}" class="btn-buy">Contacter</a>
+				</div>
+			</div>
+		</div>
+    {% endfor %}
+</div>
+</section>	
+{% endblock %}
