@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}competences index{% endblock %}
+
+{% block body %}
+    <h1>competences index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for competence in competences %}
+            <tr>
+                <td>{{ competences.id }}</td>
+                <td>{{ competences.nom }}</td>
+                <td>
+                    <a href="{{ path('competences_show', {'id': competences.id}) }}">show</a>
+                    <a href="{{ path('competences_edit', {'id': competences.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('competences_new') }}">Create new</a>
+{% endblock %}

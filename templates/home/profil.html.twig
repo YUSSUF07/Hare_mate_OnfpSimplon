@@ -28,8 +28,7 @@
 					</tr>
 				</tbody>
 			</table>
-			<a href="#" class="btn btn-primary">Editer profil</a>
-			<a href="#" class="btn btn-primary">Editer Mot de passe</a>
+			<a href="{{path('app_edit')}}" class="btn btn-primary">Editer profil</a>
 		</div>
 		<div class="col-md-4">
 			{% for competences in app.user.profil %}
@@ -53,7 +52,7 @@
 					</tr>
 				</tbody>
 			</table>
-			<a href="#" class="btn btn-primary">Modifier competences</a>
+			<a href="{{path('app_edit')}}" class="btn btn-primary">Modifier competences</a>
         </div>
 		{% endfor %}
 	</div>
