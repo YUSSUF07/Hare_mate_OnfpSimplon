@@ -4,29 +4,37 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UtilisateurRepository;
+use ApiPlatform\Core\Annotation\ApiFilter;
 use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass=UtilisateurRepository::class)
  * @UniqueEntity(fields={"email"}, message="Ce mail est deja utilise")
  */
 #[ApiResource(
-    normalizationContext:(['groups' => ['read:user']]),
-    denormalizationContext:(['groups' => 'write:user']),
-    collectionOperations:['get'=>['normalization_context' => ['groups' => ['read:users']]]
-                            
+    paginationItemsPerPage: 2,
+    paginationMaximumItemsPerPage: 2,
+    paginationClientItemsPerPage: true,
+    collectionOperations:['post' => [
+        'denormalization_context' => ['groups' => 'write:user']
                         ],
-    itemOperations:['put',
-                    'delete',
-                    'get' => ['normalization_context' => ['groups' => ['read:user','write:user']]]
-                    ]
-)]
+        'get'=>[
+            'normalization_context' => ['groups' => 'read:users']]                           
+                ],
+    itemOperations:['put'=> ['denormalization_context' => ['groups' => 'write:user']],
+    'patch'=> ['denormalization_context' => ['groups' => 'write:user']],
+    'delete' => ['denormalization_context' => ['groups' => 'write:user']],
+        'get' => ['normalization_context' => ['groups' => 'read:user']]
+            ],
+        ),
+ApiFilter(SearchFilter::class, properties:['id' => 'exact', 'nom' => 'partial'])]
 
 class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -35,7 +43,7 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    #[Groups(['read:user','read:users'])]
+    #[Groups(['read:user','read:users','write:user'])]
     private $id;
 
     /**
@@ -43,7 +51,7 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
      * @Assert\Email
      * @Assert\NotBlank
      */
-    #[Groups(['read:user','read:users'])]
+    #[Groups(['read:user','read:users','write:user'])]
     private $email;
 
     /**
@@ -55,6 +63,7 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      * @ORM\Column(type="string")
      */
+    #[Groups('write:user')]
     private $password;
 
     /**

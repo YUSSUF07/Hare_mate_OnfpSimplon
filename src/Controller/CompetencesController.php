@@ -17,7 +17,7 @@ class CompetencesController extends AbstractController
     public function index(CompetencesRepository $competencesRepository): Response
     {
         return $this->render('competences/index.html.twig', [
-            'competencess' => $competencesRepository->findAll(),
+            'competence' => $competencesRepository->findAll(),
         ]);
     }
 
@@ -37,7 +37,7 @@ class CompetencesController extends AbstractController
         }
 
         return $this->renderForm('competences/new.html.twig', [
-            'competences' => $competences,
+            'competence' => $competences,
             'form' => $form,
         ]);
     }
@@ -46,7 +46,7 @@ class CompetencesController extends AbstractController
     public function show(Competences $competences): Response
     {
         return $this->render('competences/show.html.twig', [
-            'Competences' => $competences,
+            'competence' => $competences,
         ]);
     }
 
@@ -63,7 +63,7 @@ class CompetencesController extends AbstractController
         }
 
         return $this->renderForm('competences/edit.html.twig', [
-            'competences' => $competences,
+            'competence' => $competences,
             'form' => $form,
         ]);
     }

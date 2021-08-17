@@ -37,7 +37,7 @@ class SecteurController extends AbstractController
         }
 
         return $this->renderForm('secteur/new.html.twig', [
-            'secteur' => $secteur,
+            'secteurs' => $secteur,
             'form' => $form,
         ]);
     }
@@ -46,7 +46,7 @@ class SecteurController extends AbstractController
     public function show(Secteur $secteur): Response
     {
         return $this->render('secteur/show.html.twig', [
-            'secteur' => $secteur,
+            'secteurs' => $secteur,
         ]);
     }
 
@@ -63,7 +63,7 @@ class SecteurController extends AbstractController
         }
 
         return $this->renderForm('secteur/edit.html.twig', [
-            'secteur' => $secteur,
+            'secteurs' => $secteur,
             'form' => $form,
         ]);
     }

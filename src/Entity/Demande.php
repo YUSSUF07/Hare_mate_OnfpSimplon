@@ -4,17 +4,33 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\DemandeRepository;
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 /**
  * @ORM\Entity(repositoryClass=DemandeRepository::class)
  */
-#[ApiResource( normalizationContext:(['groups' => ['read:demande']]),
-                denormalizationContext:(['groups' => 'write:demande']),
+#[ApiResource(  
+    paginationItemsPerPage: 2,
+    paginationMaximumItemsPerPage: 2,
+    paginationClientItemsPerPage: true,
+    collectionOperations:['post' => [
+    'denormalization_context' => ['groups' => 'write:demande']
+                    ],
+    'get'=>[
+        'normalization_context' => ['groups' => 'read:demandes']]                           
+            ],
+itemOperations:['put'=> ['denormalization_context' => ['groups' => 'write:demande']],
+'patch'=> ['denormalization_context' => ['groups' => 'write:demande']],
+'delete' => ['denormalization_context' => ['groups' => 'write:demande']],
+    'get' => ['normalization_context' => ['groups' => 'read:demande']]
+        ],            
 
-)]
+    ),
+    ApiFilter(SearchFilter::class, properties:['id' => 'exact', 'date' => 'partial'])]
 class Demande
 {
     /**
@@ -23,7 +39,7 @@ class Demande
      * @ORM\Column(type="integer")
      * 
      */
-    #[Groups(['read:user','read:demande'])]
+    #[Groups(['read:user','read:demande','read:demandes','write:demande'])]
     private $id;
 
     /**
@@ -35,18 +51,19 @@ class Demande
     /**
      * @ORM\Column(type="integer")
      */
-    #[Groups(['read:user','write:demande','read:demande'])]
+    #[Groups(['read:user','read:demande','write:demande'])]
     private $tarif;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    #[Groups(['read:user','read:demande','write:demande'])]
+    #[Groups(['read:user','read:demande','read:demandes'])]
     private $date;
 
     /**
      * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="demandes")
      */
+    #[Groups(['write:demande','read:demande'])]
     private $user;
     
     public function __toString()

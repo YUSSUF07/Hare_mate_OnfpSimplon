@@ -14,10 +14,12 @@
             </tr>
         </thead>
         <tbody>
-        {% for competence in competences %}
+        {% for competences in competence %}
             <tr>
                 <td>{{ competences.id }}</td>
-                <td>{{ competences.nom }}</td>
+                <td>{{ competences.specialite }}</td>
+                <td>{{ competences.niveau }}</td>
+                <td>{{ competences.secteur }}</td>
                 <td>
                     <a href="{{ path('competences_show', {'id': competences.id}) }}">show</a>
                     <a href="{{ path('competences_edit', {'id': competences.id}) }}">edit</a>

@@ -4,22 +4,32 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CompetencesRepository;
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 /**
  * @ORM\Entity(repositoryClass=CompetencesRepository::class)
  */
 #[ApiResource(
-    normalizationContext:(['groups' => 'read:competences']),
-    denormalizationContext:(['groups' => 'write:competence']),
-    collectionOperations:(['get'=> ['groups' => 'read:competences']]),
-    itemOperations:['put' => ['groups' => 'write:competence'],
-                    'delete',
-                    'get' => ['normalization_context' => ['groups' => 'read:competence']]
-                    ]
-)]
+    paginationItemsPerPage: 2,
+    paginationMaximumItemsPerPage: 2,
+    paginationClientItemsPerPage: true,
+    collectionOperations:['post' => [
+        'denormalization_context' => ['groups' => 'write:competence']
+                        ],
+        'get'=>[
+            'normalization_context' => ['groups' => 'read:competences']]                           
+                ],
+    itemOperations:['put'=> ['denormalization_context' => ['groups' => 'write:competence']],
+    'patch'=> ['denormalization_context' => ['groups' => 'write:competence']],
+    'delete' => ['denormalization_context' => ['groups' => 'write:competence']],
+        'get' => ['normalization_context' => ['groups' => 'read:competence']]
+            ],
+        ),
+        ApiFilter(SearchFilter::class, properties:['id' => 'exact', 'specialite' => 'partial'])]
 class Competences
 {
     /**
@@ -27,13 +37,13 @@ class Competences
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    #[Groups(['read:competences','read:competence','read:user'])]
+    #[Groups(['read:competences','read:competence','read:user','write:competence'])]
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    #[Groups(['read:competences','read:competence','read:user','write:competence','read:secteur'])]
+    #[Groups(['read:competences','read:competence','read:user','read:secteur','write:competence'])]
     private $specialite;
 
     /**
@@ -53,7 +63,7 @@ class Competences
     /**
      * @ORM\ManyToOne(targetEntity=Secteur::class, inversedBy="competences")
      */
-    #[Groups(['read:competence','read:competences','read:user'])]
+    #[Groups(['read:competence','read:user','write:competence'])]
     private $secteur;
 
     /**
