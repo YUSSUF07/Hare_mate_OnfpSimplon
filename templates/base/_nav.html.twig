@@ -15,15 +15,16 @@
 						<a class="nav-link scrollto active" href="{{path('home')}}">Acceuil</a>
 					</li>
 					<li>
-						<a class="nav-link scrollto" href="#">Secteur</a>
+						<a class="nav-link scrollto" href="{{path('profil')}}">profil</a>
 					</li>
 					<li class="dropdown">
-						<a href="#">
-							<span>Profil</span>
+						<a href="{{path('demande_index')}}">
+							<span>Demandes</span>
 							<i class="bi bi-chevron-down"></i>
 						</a>
 						<ul>
-							<li><a href="#">Informations</a></li>
+							<li><a href="#">mes demandes</a></li>
+							<li><a href="#">Demandes postes</a></li>
 						</ul>
 					{% endif %}
 				</li>

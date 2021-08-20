@@ -24,7 +24,6 @@ class DemandePersister implements DataPersisterInterface
     public function persist($data)
     {
         $data->setdate(new \DateTime());
-
         $this->em->persist($data);
         $this->em->flush();
         

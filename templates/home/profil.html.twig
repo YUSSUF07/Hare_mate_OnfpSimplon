@@ -1,11 +1,11 @@
 {% extends "base.html.twig" %}
-{% block title %}Profil de {{app.user.nom}}{% endblock %}
+{% block title %}Profil de
+	{{app.user.nom}}
+{% endblock %}
 {% block body %}
 	<div class="container mt-4">
 		<div class="row">
-			<div class="col-md-8">
-				
-			</div>
+			<div class="col-md-8"></div>
 		</div>
 		<div class="col-md-4">
 			<table class="table">
@@ -32,28 +32,32 @@
 		</div>
 		<div class="col-md-4">
 			{% for competences in app.user.profil %}
-			<table class="table">
-				<tbody>
-					<tr>
-						<th>specialite</th>
-						<td>{{ competences.specialite }}</td>
-					</tr>
-					<tr>
-						<th>niveau</th>
-						<td>{{ competences.niveau }}</td>
-					</tr>
-					<tr>
-						<th>description</th>
-						<td>{{ competences.description }}</td>
-					</tr>
-					<tr>
-						<th>secteur</th>
-						<td>{{ competences.secteur }}</td>
-					</tr>
-				</tbody>
-			</table>
-			<a href="{{path('app_edit')}}" class="btn btn-primary">Modifier competences</a>
-        </div>
+				<table class="table">
+					<tbody>
+						<tr>
+							<th>specialite</th>
+							<td>{{ competences.specialite }}</td>
+						</tr>
+						<tr>
+							<th>niveau</th>
+							<td>{{ competences.niveau }}</td>
+						</tr>
+						<tr>
+							<th>description</th>
+							<td>{{ competences.description }}</td>
+						</tr>
+						<tr>
+							<th>secteur</th>
+							<td>{{ competences.secteur }}</td>
+						</tr>
+					</tbody>
+				</table>
+				<a href="{{path('app_edit')}}" class="btn btn-primary">Modifier competences</a>
+			</div>
+		{% else %}
+			<br>
+			<a href="{{path('competences_new') }}" class="btn btn-primary">
+				Creer competences</a>
 		{% endfor %}
 	</div>
 

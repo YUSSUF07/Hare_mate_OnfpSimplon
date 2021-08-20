@@ -43,7 +43,7 @@ class Competences
     /**
      * @ORM\Column(type="string", length=255)
      */
-    #[Groups(['read:competences','read:competence','read:user','read:secteur','write:competence'])]
+    #[Groups(['read:competences','read:competence','read:user','read:secteur','write:competence','secteur'])]
     private $specialite;
 
     /**

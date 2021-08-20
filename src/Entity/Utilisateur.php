@@ -93,6 +93,7 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="integer")
      */
+   
     #[Groups(['read:user','write:user'])]
     private $telephone;
 
@@ -101,8 +102,6 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[Groups('read:user')]
     private $profil;
-
-
 
     public function __toString()
     {
@@ -113,6 +112,7 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->demandes = new ArrayCollection();
         $this->profil = new ArrayCollection();
+        $this->demand = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -313,5 +313,12 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-
+    /**
+     * @return Collection|Demande[]
+     */
+    public function getDemand(): Collection
+    {
+        return $this->demand;
+    }
+    
 }

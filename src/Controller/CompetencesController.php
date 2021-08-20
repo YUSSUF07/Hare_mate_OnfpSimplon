@@ -33,7 +33,7 @@ class CompetencesController extends AbstractController
             $entityManager->persist($competences);
             $entityManager->flush();
 
-            return $this->redirectToRoute('competences_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('profil', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('competences/new.html.twig', [

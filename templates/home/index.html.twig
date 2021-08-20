@@ -21,9 +21,29 @@
 			<p>
 				Rechercher dans notre base de données les meilleurs profils pour t'aider dans tes activités
 			</p>
-			<a class="cta-btn" href="{{path('free')}}">Demandez un service</a>
+			<a class="cta-btn" href="{{path('free')}}">Rechercher Freelancer</a>
+			<a class="cta-btn" href="{{path('demande_index')}}">Mes Demandes</a>
 		</div>
 
+	</div>
+</section>
+<section id="pricing" class="pricing">
+	<div class="row">
+		{% for competences in free %}
+			<div class="col-lg-3 col-md-6 mt-4 mt-md-0">
+				<div class="box featured">
+					<h3>{{competences.secteur| upper}}</h3>
+					<h4>{{competences.utilisateur | upper}}</h4>
+					<ul> 
+						<li>{{competences.specialite| upper}}</li>
+						<li>{{competences.niveau| upper}}</li>
+					</ul>
+					<div class="btn-wrap">
+						<a href="{{path('free')}}" class="btn-buy">Contacter</a>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
 	</div>
 </section>
 <section id="pricing" class="pricing">
