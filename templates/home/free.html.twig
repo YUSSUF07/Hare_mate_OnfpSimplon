@@ -1,57 +1,37 @@
 {% extends "base.html.twig" %}
-{% block title %}Profil de
-	{{app.user.nom}}
+{% block title %}Recherche
 {% endblock %}
 {% block body %}
-	<div class="container mt-4">
-		<div class="row">
-			<div class="col-md-8">
-				<table class="table">
-					<tbody>
-						<tr>
-							<th>nom</th>
-							<td>{{ app.user.nom }}</td>
-						</tr>
-						<tr>
-							<th>prenom</th>
-							<td>{{ app.user.prenom }}</td>
-						</tr>
-						<tr>
-							<th>adresse</th>
-							<td>{{ app.user.adresse }}</td>
-						</tr>
-						<tr>
-							<th>Telephone</th>
-							<td>{{ app.user.telephone }}</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
+	<div class="jumbotron">
+		<div class="container">
+			{{ form_start(form) }}
+			{{ form_widget(form) }}
+			<button type="submit" class="btn btn-primary">Rechercher</button>
+			{{ form_end(form) }}
 		</div>
-		<div class="col-md-4">
-			{% for competences in app.user.profil %}
-				<table class="table">
-					<tbody>
-						<tr>
-							<th>specialite</th>
-							<td>{{ competences.specialite }}</td>
-						</tr>
-						<tr>
-							<th>niveau</th>
-							<td>{{ competences.niveau }}</td>
-						</tr>
-						<tr>
-							<th>description</th>
-							<td>{{ competences.description }}</td>
-						</tr>
-						<tr>
-							<th>secteur</th>
-							<td>{{ competences.secteur }}</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		{% endfor %}
 	</div>
-
+	{% for competences in competences %}
+		<div class="contact" >
+			<table class="table">
+				<tbody>
+					<tr>
+						<th>specialite</th>
+						<td>{{ competences.specialite }}</td>
+					</tr>
+					<tr>
+						<th>niveau</th>
+						<td>{{ competences.niveau }}</td>
+					</tr>
+					<tr>
+						<th>description</th>
+						<td>{{ competences.description }}</td>
+					</tr>
+					<tr>
+						<th>secteur</th>
+						<td>{{ competences.secteur }}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	{% endfor %}
 {% endblock %}

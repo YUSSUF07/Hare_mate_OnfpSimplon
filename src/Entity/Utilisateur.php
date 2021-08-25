@@ -103,6 +103,7 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[Groups('read:user')]
     private $profil;
 
+
     public function __toString()
     {
         return(string) $this->prenom;
@@ -113,6 +114,7 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
         $this->demandes = new ArrayCollection();
         $this->profil = new ArrayCollection();
         $this->demand = new ArrayCollection();
+        $this->services = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -320,5 +322,5 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     {
         return $this->demand;
     }
-    
+
 }
