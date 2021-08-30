@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Competences;
+use App\Entity\Utilisateur;
 use App\Form\CompetencesType;
 use App\Repository\CompetencesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

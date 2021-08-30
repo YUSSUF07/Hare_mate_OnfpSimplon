@@ -7,6 +7,7 @@ api_platform:
         json: ['application/merge-patch+json']
     swagger:
         versions: [3]
-        api_keys:
-                name: Authorization
-                type: header
+        # api_keys:
+        #     apiKeys:
+        #         name: Authorization
+        #         type: header

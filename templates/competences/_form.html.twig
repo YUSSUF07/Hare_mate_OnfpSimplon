@@ -1,4 +1,8 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Enregistre') }}</button>
+{{ form_row(form.specialite) }}
+{{ form_row(form.niveau) }}
+{{ form_row(form.description) }}
+{{ form_row(form.secteur) }}
+{{ form_row(form.utilisateur) }}
+<button class="btn btn-primary">{{ button_label|default('Enregistre') }}</button>
 {{ form_end(form) }}
